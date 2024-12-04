@@ -16,12 +16,13 @@ class CourseClassSerializer(serializers.HyperlinkedModelSerializer):
     )
 
     course = serializers.HyperlinkedRelatedField(
-        view_name='course_detail',
+        view_name='course:course_detail',
         read_only=True,
         lookup_field='slug'
     )
 
     class Meta:
         model = CourseClass
-        fields = ('course_slug', 'title', 'short_desc', 'desc', 'slug', 'course')
-        read_only_fields = ['course',]
+        fields = ('course_slug', 'title', 'short_desc',
+                  'desc', 'slug', 'course')
+        read_only_fields = ['course', ]
