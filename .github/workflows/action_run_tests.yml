@@ -1,8 +1,8 @@
-name: Run Unit Tests
+name: Run flake8 and Unit Tests
 on: push
 jobs:
   execute_tests:
-    name: Prepare and Run Unit Tests
+    name: Prepare and Run flake8, and Unit Tests
     runs-on: ubuntu-latest
     steps:
       - name: Update
@@ -13,7 +13,7 @@ jobs:
         run: sudo apt install python3-pip
       - name: Install requirements
         run: pip install -r requirements.txt
-      - name: Execute unit tests
+      - name: Run flake8 and execute unit tests
         env:
           DJANGO_SETTINGS_MODULE: learnwebdev.settings
-        run: python manage.py test
+        run: flake8 && python manage.py test
