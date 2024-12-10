@@ -16,13 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularSwaggerView,
 )
 
+from learnwebdev import settings
+
 urlpatterns = [
+    path('', include('main.urls')),
     path(
         '',
         SpectacularSwaggerView.as_view(url_name='api-schema'),
@@ -33,3 +35,11 @@ urlpatterns = [
     path('api/v1/', include('courses.urls')),
     path('api/v1/user/', include('user.urls')),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns += [
+        path('__debug__/', include(debug_toolbar.urls)),
+        # ... other URL patterns ...
+    ]
